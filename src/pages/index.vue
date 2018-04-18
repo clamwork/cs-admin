@@ -4,7 +4,7 @@
       <div class="logo font-futura">
         <router-link to="/">
           <img src="../assets/images/logo.png" alt="" width="46">
-          <span>东经科技</span>
+          <span>东经易网</span>
         </router-link>
       </div>
       <div class="user">
