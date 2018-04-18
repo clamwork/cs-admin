@@ -43,12 +43,12 @@
                 <span>{{item.name}}</span>
               </el-menu-item>
             </template>
-            <el-menu-item index="">
-              <a href="https://analytics.google.com" target="_blank">
-                <i class="iconfont mar icon-count"></i>
-                <span>Google Analytics</span>
-              </a>
-            </el-menu-item>
+            <!--<el-menu-item index="">-->
+              <!--<a href="https://analytics.google.com" target="_blank">-->
+                <!--<i class="iconfont mar icon-count"></i>-->
+                <!--<span>Google Analytics</span>-->
+              <!--</a>-->
+            <!--</el-menu-item>-->
           </el-menu>
       </aside>
 

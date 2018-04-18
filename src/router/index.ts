@@ -42,10 +42,11 @@ const routes: RouteConfig[] = [
     path: '/',
     name: '呼叫中心',
     component: index,
-    meta: { leaf: false, icon: 'icon-article' },
+    meta: { leaf: true, icon: 'icon-article' },
     children: [
-      { path: '/article/index', component: article, name: '呼叫中心', meta: { requiresAuth: true, icon: 'icon-list' } },
-      { path: '/article/release', component: release, name: '发布文章', meta: { requiresAuth: true, icon: 'icon-write' } }
+      { path: '/article/index', component: article, name: '呼叫中心', meta: { requiresAuth: true, icon: 'icon-list' } }
+      // { path: '/article/release', component: release, name: '发布文章',
+      // meta: { requiresAuth: true, icon: 'icon-write' } }
     ]
   },
   {
@@ -79,9 +80,21 @@ const routes: RouteConfig[] = [
     path: '/',
     name: '管理中心',
     component: index,
-    meta: { leaf: true, icon: 'icon-sell' },
+    meta: { leaf: false, icon: 'icon-sell' },
     children: [
-      { path: '/book', component: book, name: '管理中心', meta: { requiresAuth: true } }
+      { path: '/book', component: book, name: '客服管理', meta: { requiresAuth: true, icon: 'icon-list' } },
+      { path: '/book', component: book, name: '快捷回复', meta: { requiresAuth: true, icon: 'icon-list' } },
+      { path: '/book', component: book, name: '工单类型管理', meta: { requiresAuth: true, icon: 'icon-list' } },
+      { path: '/book', component: book, name: '流程管理', meta: { requiresAuth: true, icon: 'icon-list' } }
+    ]
+  },
+  {
+    path: '/',
+    name: '个人设置',
+    component: index,
+    meta: { leaf: true, icon: 'icon-set' },
+    children: [
+      { path: '/set', component: set, name: '个人设置', meta: { page: 'set', requiresAuth: true } }
     ]
   },
   {
