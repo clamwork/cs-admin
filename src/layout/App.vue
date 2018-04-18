@@ -7,14 +7,13 @@
 </template>
 
 <script lang="ts">
-
   import Vue from 'vue'
   import Component from 'vue-class-component'
 
   @Component
   export default class App extends Vue {
     private beforeCreate () {
-      this.$store.dispatch('initAuth')
+      // this.$store.dispatch('initAuth')
     }
   }
 </script>

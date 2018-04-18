@@ -4,7 +4,7 @@
       <div class="logo font-futura">
         <router-link to="/">
           <img src="../assets/images/logo.png" alt="" width="46">
-          <span>三毛</span>
+          <span>东经科技</span>
         </router-link>
       </div>
       <div class="user">
@@ -46,7 +46,7 @@
             <el-menu-item index="">
               <a href="https://analytics.google.com" target="_blank">
                 <i class="iconfont mar icon-count"></i>
-                <span>Google Analytics</span>           
+                <span>Google Analytics</span>
               </a>
             </el-menu-item>
           </el-menu>
@@ -81,7 +81,7 @@ import { Route } from 'vue-router'
 
 @Component
 export default class Index extends Vue {
-  private indexPath: string = '我的面板'
+  private indexPath: string = '首页'
   private defaultPath: string = ''
   private defaultOpen: string[] = []
   private currentPathName: string = ''
