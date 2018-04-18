@@ -17,18 +17,12 @@ declare namespace Ajax {
      * 数据
      * @type { any }
      */
-    data: any,
+    result: any,
 
     /**
      * 消息
      * @type { string }
      */
-    message: string,
-
-    /**
-     * 成功状态
-     * @type { boolean}
-     */
-    success: boolean
+    message: string
   }
 }

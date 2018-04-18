@@ -2,10 +2,10 @@
  * 文章
  */
 
-import { ActionTree, MutationTree } from 'vuex';
+import { ActionTree, MutationTree } from 'vuex'
 
-import { success, error } from '../../utils/response';
-import service from '../../api';
+import { success, error } from '../../utils/response'
+import service from '../../api'
 
 interface State {
   fetch: boolean;
@@ -38,137 +38,136 @@ const state: State = {
     publish: 0,
     type: 0,
     descript: '',
-    tag: [],
-  },
-};
+    tag: []
+  }
+}
 
 const actions: ActionTree<State, any> = {
 
   // 获取列表
-  async getArts(
+  async getArts (
     { commit },
-    data: Params,
+    data: Params
   ): Promise<Ajax.AjaxResponse> {
-    commit('REQUEST_LIST');
-    const res: Ajax.AjaxResponse = await service.getArts(data);
+    commit('REQUEST_LIST')
+    const res: Ajax.AjaxResponse = await service.getArts(data)
     if (res && res.code === 1) {
-      const list: StoreState.Article[] = res.data.list.map((item: StoreState.Article ) => {
-        return { ...item, deleteing: false };
-      });
-      const total: number = res.data.pagination.total;
-      commit('REQUEST_LIST_SUCCESS', { list, total });
-    } else {commit('REQUEST_LIST_FAIL'); }
-    return res;
+      const list: StoreState.Article[] = res.result.list.map((item: StoreState.Article ) => {
+        return { ...item, deleteing: false }
+      })
+      const total: number = res.result.pagination.total
+      commit('REQUEST_LIST_SUCCESS', { list, total })
+    } else commit('REQUEST_LIST_FAIL')
+    return res
   },
 
   // 获取单个文章
-  async getArt(
+  async getArt (
     { commit },
-    params: { _id: string },
+    params: { _id: string }
   ): Promise<void> {
-    commit('REQUEST_LIST');
-    const res: Ajax.AjaxResponse = await service.getArt(params);
+    commit('REQUEST_LIST')
+    const res: Ajax.AjaxResponse = await service.getArt(params)
     if (res && res.code === 1) {
-      commit('REQUEST_DETAIL_SUCCESS', res.data);
-    } else { error('REQUEST_DETAIL_FAIL'); }
+      commit('REQUEST_DETAIL_SUCCESS', res.result)
+    }
+    else error('REQUEST_DETAIL_FAIL')
   },
 
   // 添加文章
-  async postArt(
+  async postArt (
     { commit },
-    Article: StoreState.Article,
+    Article: StoreState.Article
   ): Promise<Ajax.AjaxResponse> {
-    commit('POST_ARTICLE');
-    const res = await service.postArt(Article);
-    if (res && res.code === 1) { success('添加文章成功');
-    } else { error('添加文章失败'); }
-    commit('POST_ARTICLE_FINAL');
-    return res;
+    commit('POST_ARTICLE')
+    const res = await service.postArt(Article)
+    if (res && res.code === 1) success('添加文章成功')
+    else error('添加文章失败')
+    commit('POST_ARTICLE_FINAL')
+    return res
   },
 
   // 修改文章
-  async putArt(
+  async putArt (
     { commit },
-    Article: StoreState.Article,
+    Article: StoreState.Article
   ): Promise<Ajax.AjaxResponse> {
-    commit('POST_ARTICLE');
-    const res = await service.putArt(Article);
-    if (res && res.code === 1) {
-      success('修改文章成功');
-    } else { error('修改文章失败'); }
-    commit('POST_ARTICLE_FINAL');
-    return res;
+    commit('POST_ARTICLE')
+    const res = await service.putArt(Article)
+    if (res && res.code === 1) success('修改文章成功')
+    else error('修改文章失败')
+    commit('POST_ARTICLE_FINAL')
+    return res
   },
 
   // 改变状态
-  async patchArt(
+  async patchArt (
     { commit },
-    Article: { _id: string; state?: StoreState.State; publish?: StoreState.State; [index: string]: any; },
+    Article: { _id: string; state?: StoreState.State; publish?: StoreState.State; [index: string]: any; }
   ): Promise<Ajax.AjaxResponse> {
-    const res: Ajax.AjaxResponse = await service.patchArt(Article);
+    const res: Ajax.AjaxResponse = await service.patchArt(Article)
     if (res && res.code === 1) {
-      success('修改成功');
-      commit('PATCH_HERO_SUCCESS', Article);
-    } else { error(res.message); }
-    return res;
+      success('修改成功')
+      commit('PATCH_HERO_SUCCESS', Article)
+    } else error(res.message)
+    return res
   },
 
   // 删除
-  async deleteArt(
+  async deleteArt (
     { commit },
-    Article: { _id: string },
+    Article: { _id: string }
   ): Promise<Ajax.AjaxResponse> {
-    commit('DELETE_ARTICLE', Article);
-    const res: Ajax.AjaxResponse = await service.deleteArt(Article);
-    if (res && res.code === 1) { success('删除成功'); }
-    else { error(res.message); }
+    commit('DELETE_ARTICLE', Article)
+    const res: Ajax.AjaxResponse = await service.deleteArt(Article)
+    if (res && res.code === 1) success('删除成功')
+    else error(res.message)
     commit('DELETE_ARTICLE_FINAL', Article)
-    return res;
-  },
+    return res
+  }
 }
 
 const mutations: MutationTree<State> = {
   'REQUEST_LIST' (state: State): void {
-    state.fetch = true;
+    state.fetch = true
   },
 
   'REQUEST_LIST_SUCCESS' (
     state: State,
-    payload: { list: StoreState.Article[], total: number },
+    payload: { list: StoreState.Article[], total: number }
   ): void {
-    state.fetch = false;
-    state.list = payload.list;
-    state.total = payload.total;
+    state.fetch = false
+    state.list = payload.list
+    state.total = payload.total
   },
 
   'REQUEST_LIST_FAIL' (state: State): void {
-    state.fetch = false;
-    state.list = [];
-    state.total = 0;
+    state.fetch = false
+    state.list = []
+    state.total = 0
   },
 
   'DELETE_ARTICLE' (
     state: State,
     Article: { _id: string }
   ): void {
-    (<StoreState.Article>state.list.find((item: StoreState.Article) => item._id === Article._id)).deleteing = true;
+    (<StoreState.Article>state.list.find((item: StoreState.Article) => item._id === Article._id)).deleteing = true
   },
 
   'DELETE_ARTICLE_FINAL' (
     state: State,
-    Article: { _id: string },
+    Article: { _id: string }
   ): void {
-    (<StoreState.Article>state.list.find((item: StoreState.Article) => item._id === Article._id)).deleteing = false;
+    (<StoreState.Article>state.list.find((item: StoreState.Article) => item._id === Article._id)).deleteing = false
   },
 
   'PATCH_HERO_SUCCESS' (
     state: State,
     Article: { _id: string; state?: StoreState.State; publish?: StoreState.State; [index: string]: any }
   ): void {
-    const list: StoreState.Article =
-      ( <StoreState.Article> state.list.find((item: StoreState.Article) => item._id === Article._id))
-    for(const i in Article) {
-      list[i] = Article[i];
+    let list: StoreState.Article = (<StoreState.Article>state.list.find((item: StoreState.Article) => item._id === Article._id))
+    for (let i in Article) {
+      list[i] = Article[i]
     }
   },
 
@@ -185,17 +184,17 @@ const mutations: MutationTree<State> = {
   },
 
   'POST_ARTICLE' (state: State) {
-    state.posting = true;
+    state.posting = true
   },
 
   'POST_ARTICLE_FINAL' (state: State) {
-    state.posting = false;
-  },
-};
+    state.posting = false
+  }
+}
 
 export default {
   namespaced: true,
   state,
   actions,
-  mutations,
-};
+  mutations
+}

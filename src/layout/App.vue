@@ -1,23 +1,30 @@
 <template>
   <div id="app">
-    <img src="../assets/logo.png">
-    <router-view/>
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: 'App'
-}
+
+  import Vue from 'vue'
+  import Component from 'vue-class-component'
+
+  @Component
+  export default class App extends Vue {
+    private beforeCreate () {
+      this.$store.dispatch('initAuth')
+    }
+  }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+
+  #app {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+  }
 </style>

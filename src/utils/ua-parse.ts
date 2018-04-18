@@ -1,23 +1,23 @@
 // https://github.com/surmon-china/surmon.me/blob/b7d467e0bc6fde6ef24cfca1103253dcefe3b332/utils/comment-ua-parse.js
 
 // ua解析
-export const UAParse = (e: string): string => {
-  type R = Array<string> | null
+export const uaParse = (e: string): string => {
+  type R = string[] | null
   let r: R = []
   let outputer = ''
-  if ((r = e.match(/MSIE\s([^\s|]+)/gi))) {
+  if ((r === e.match(/MSIE\s([^\s|]+)/gi))) {
     outputer = `<span class="ua_ie"><i class="iconfont icon-internet"></i> Internet Explorer | ${r[0]
       .replace('MSIE', '')
       .split('.')[0]}`
-  } else if ((r = e.match(/FireFox\/([^\s]+)/gi))) {
-    let r1 = r[0].split('/')
+  } else if (( r = e.match(/FireFox\/([^\s]+)/gi))) {
+    const r1 = r[0].split('/')
     outputer = `<span class="ua_firefox"><i class="iconfont icon-internet"></i> Mozilla FireFox | ${r1[1]}`
   } else if ((r = e.match(/Maxthon([\d]*)\/([^\s]+)/gi))) {
     // let r1 = r[0].split('/')
     outputer =
       '<span class="ua_maxthon"><i class="iconfont icon-internet"></i> Maxthon'
   } else if ((r = e.match(/UBrowser([\d]*)\/([^\s]+)/gi))) {
-    let r1 = r[0].split('/')
+    const r1 = r[0].split('/')
     outputer = `<span class="ua_ucweb"><i class="iconfont icon-internet"></i> UCBrowser | ${r1[1]}`
   } else if ((r = e.match(/MetaSr/gi))) {
     outputer =
@@ -32,32 +32,32 @@ export const UAParse = (e: string): string => {
     outputer =
       '<span class="ua_lbbrowser"><i class="iconfont icon-internet"></i> 猎豹安全浏览器'
   } else if ((r = e.match(/MicroMessenger\/([^\s]+)/gi))) {
-    let r1 = r[0].split('/')
+    const r1 = r[0].split('/')
     outputer = `<span class="ua_qq"><i class="iconfont icon-wechat"></i> 微信 | ${r1[1].split(
       '/'
     )[0]}`
   } else if ((r = e.match(/QQBrowser\/([^\s]+)/gi))) {
-    let r1 = r[0].split('/')
+    const r1 = r[0].split('/')
     outputer = `<span class="ua_qq"><i class="iconfont icon-internet"></i> QQ浏览器 | ${r1[1].split(
       '/'
     )[0]}`
   } else if ((r = e.match(/QQ\/([^\s]+)/gi))) {
-    let r1 = r[0].split('/')
+    const r1 = r[0].split('/')
     outputer = `<span class="ua_qq"><i class="iconfont icon-internet"></i> QQ浏览器 | ${r1[1].split(
       '/'
     )[0]}`
   } else if ((r = e.match(/MiuiBrowser\/([^\s]+)/gi))) {
-    let r1 = r[0].split('/')
+    const r1 = r[0].split('/')
     outputer = `<span class="ua_mi"><i class="iconfont icon-internet"></i> Miui浏览器 | ${r1[1].split(
       '/'
     )[0]}`
   } else if ((r = e.match(/Chrome([\d]*)\/([^\s]+)/gi))) {
-    let r1 = r[0].split('/')
+    const r1 = r[0].split('/')
     outputer = `<span class="ua_chrome"><i class="iconfont icon-internet"></i> Chrome | ${r1[1].split(
       '.'
     )[0]}`
   } else if ((r = e.match(/safari\/([^\s]+)/gi))) {
-    let r1 = r[0].split('/')
+    const r1 = r[0].split('/')
     outputer = `<span class="ua_apple"><i class="iconfont icon-internet"></i> Apple Safari | ${r1[1]}`
   } else if ((r = e.match(/Opera[\s|/]([^\s]+)/gi))) {
     // let r1 = r[0].split('/')
@@ -72,7 +72,7 @@ export const UAParse = (e: string): string => {
 }
 
 // os解析
-export const OSParse = (e: string): string => {
+export const osParse = (e: string): string => {
   let os: string = ''
   if (e.match(/win/gi)) {
     if (e.match(/nt 5.1/gi)) {

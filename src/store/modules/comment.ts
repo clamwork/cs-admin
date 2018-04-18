@@ -37,10 +37,10 @@ const actions: ActionTree<State, any> = {
     commit('REQUEST_LIST')
     const res: Ajax.AjaxResponse = await service.getComments(data)
     if (res && res.code === 1) {
-      const list: StoreState.Comment[] = res.data.data.map((item: StoreState.Comment ) => {
+      const list: StoreState.Comment[] = res.result.data.map((item: StoreState.Comment ) => {
         return { ...item, deleteing: false }
       })
-      const total: number = res.data.pagination.total
+      const total: number = res.result.pagination.total
       commit('REQUEST_LIST_SUCCESS', { list, total })
     } else commit('REQUEST_LIST_FAIL')
     return res

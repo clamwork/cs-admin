@@ -35,10 +35,10 @@ const actions: ActionTree<State, any> = {
     commit('REQUEST_LIST')
     const res: Ajax.AjaxResponse = await service.getHeros(data)
     if (res && res.code === 1) {
-      const list: StoreState.Hero[] = res.data.list.map((item: StoreState.Hero ) => {
+      const list: StoreState.Hero[] = res.result.list.map((item: StoreState.Hero ) => {
         return { ...item, deleteing: false }
       })
-      const total: number = res.data.pagination.total
+      const total: number = res.result.pagination.total
       commit('REQUEST_LIST_SUCCESS', { list, total })
     } else commit('REQUEST_LIST_FAIL')
     return res
